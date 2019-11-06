@@ -1,0 +1,7 @@
+---
+
+- name: CHRONOGRAF DEBIAN | Installation
+  apt:
+    deb: "{{ chronograf_package_url }}"
+    state: present
+  notify: Restart chronograf

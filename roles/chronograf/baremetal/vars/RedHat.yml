@@ -1,0 +1,7 @@
+---
+
+###
+# REDHAT
+###
+
+chronograf_package_url: https://dl.influxdata.com/chronograf/releases/chronograf-{{ chronograf_version }}.x86_64.rpm

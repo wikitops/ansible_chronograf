@@ -1,0 +1,19 @@
+---
+
+###
+# CHRONOGRAF
+###
+
+# Version
+chronograf_version: 1.7.14
+
+# Extra plugins
+# chronograf_plugins_extra:
+#   - filename: chanegme
+#     state: present
+
+###
+# INFLUXDB
+###
+
+chronograf_influxdb_url: "http://127.0.0.1:8086"

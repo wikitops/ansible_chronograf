@@ -1,0 +1,7 @@
+---
+
+- name: CHRONOGRAF REDHAT | Installation
+  yum:
+    name: "{{ chronograf_package_url }}"
+    state: present
+  notify: Restart chronograf

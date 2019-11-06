@@ -1,0 +1,7 @@
+---
+
+###
+# DEBIAN
+###
+
+chronograf_package_url: https://dl.influxdata.com/chronograf/releases/chronograf_{{ chronograf_version }}_amd64.deb

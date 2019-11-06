@@ -1,0 +1,24 @@
+---
+
+- name: CHRONOGRAF KUBERNETES | Create namespace
+  k8s:
+    name: "{{ item.name }}"
+    api_version: v1
+    kind: Namespace
+    state: "{{ item.state }}"
+  loop: "{{ chronograf_namespace }}"
+
+- name: CHRONOGRAF KUBERNETES | Manage Secret
+  k8s:
+    state: present
+    definition: "{{ lookup('template', 'secret.yaml') | from_yaml }}"
+
+- name: CHRONOGRAF KUBERNETES | Manage Deployments
+  k8s:
+    state: present
+    definition: "{{ lookup('template', 'deployment.yaml') | from_yaml }}"
+
+- name: CHRONOGRAF KUBERNETES | Manage Services
+  k8s:
+    state: present
+    definition: "{{ lookup('template', 'service.yaml') | from_yaml }}"

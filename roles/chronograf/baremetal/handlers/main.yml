@@ -1,0 +1,7 @@
+---
+
+- name: Restart chronograf
+  systemd:
+    name: chronograf
+    state: restarted
+    enabled: yes

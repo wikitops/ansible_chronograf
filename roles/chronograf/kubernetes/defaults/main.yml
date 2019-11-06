@@ -1,0 +1,54 @@
+---
+
+###
+# CHRONOGRAF
+###
+
+# Version
+chronograf_version: 1.7.14
+
+# Resource path
+chronograf_resource_path: "/usr/share/chronograf/resources"
+
+###
+# INFLUXDB
+###
+
+# Databases
+chronograf_influxdb_database:
+  - monitor.src:
+      id: 1000
+      name: changeme
+      password: changeme # Encrypt me
+      url: http://0.0.0.0:8886
+      type: influx
+      insecureSkipVerify: false
+      default: true
+      telegraf: telegraf
+      organization: my_organisation
+
+###
+# KUBERNETES
+###
+
+# Namespace
+chronograf_namespace:
+  - name: chronograf
+    state: present
+
+# Deployment
+chronograf_deployment:
+  image: quay.io/influxdb/chronograf:{{ chronograf_version }}
+  name: chronograf
+  namespace: chronograf
+  ports:
+    - name: chronograf
+      containerPort: 8888
+  replicas: 1
+  resources:
+    limits:
+      memory: 2Gi
+      cpu: "200m"
+    requests:
+      memory: 2Gi
+      cpu: "200m"

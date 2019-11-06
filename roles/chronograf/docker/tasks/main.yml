@@ -1,0 +1,17 @@
+---
+
+- name: CHRONOGRAF DOCKER | Create the network
+  docker_network:
+    name: "{{ chronograf_docker_network.name }}"
+    state: "{{ chronograf_docker_network.state }}"
+
+- name: CHRONOGRAF DOCKER | Deploy the container
+  docker_container:
+    env: "{{ chronograf_docker.env }}"
+    name: "{{ chronograf_docker.name }}"
+    image: "{{ chronograf_docker.image }}"
+    state: "{{ chronograf_docker.state }}"
+    restart: yes
+    ports: "{{ chronograf_docker.ports }}"
+    networks:
+      - name: "{{ chronograf_docker.network }}"

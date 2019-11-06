@@ -1,0 +1,48 @@
+---
+
+###
+# CHRONOGRAF
+###
+
+# Version
+chronograf_version: 1.7.14
+
+# Host && port
+chronograf_host: 0.0.0.0
+chronograf_port: 8888
+
+# Bolt Database
+chronograf_database: "./chronograf-v1.db"
+
+###
+# INFLUXDB
+###
+
+chronograf_influxdb_url: http://influxdb:8886
+chronograf_influxdb_username: changeme
+chronograf_influxdb_password: changeme # Encrypt me
+
+###
+# DOCKER
+###
+
+# Network
+chronograf_docker_network:
+  name: chronograf
+  state: present
+
+# Stack
+chronograf_docker:
+  name: chronograf
+  image: quay.io/influxdb/chronograf:{{ chronograf_version }}
+  state: started
+  network: chronograf
+  ports:
+    - 8888:8888/tcp
+  env:
+    HOST: "{{ chronograf_host }}"
+    PORT: "{{ chronograf_port }}"
+    BOLT_PATH: "{{ chronograf_database }}"
+    INFLUXDB_URL: "{{ chronograf_influxdb_url }}"
+    INFLUXDB_USERNAME: "{{ chronograf_influxdb_username }}"
+    INFLUXDB_PASSWORD: "{{ chronograf_influxdb_password }}"

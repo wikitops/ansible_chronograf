@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "{{ chronograf_deployment.name }}"
+  namespace: "{{ chronograf_deployment.namespace }}"
+spec:
+  replicas: {{ chronograf_deployment.replicas }}
+  selector:
+    matchLabels:
+      app: "{{ chronograf_deployment.name }}"
+  template:
+    metadata:
+      labels:
+        app: "{{ chronograf_deployment.name }}"
+    spec:
+      containers:
+      - image: "{{ chronograf_deployment.image }}"
+        livenessProbe:
+          httpGet:
+            path: /ping
+            port: api
+        name: "{{ chronograf_deployment.name }}"
+        ports:
+{% for port in chronograf_deployment.ports %}
+          - name: {{ port.name }}
+            containerPort: {{ port.containerPort }}
+{% endfor %}
+        readinessProbe:
+          httpGet:
+            path: /ping
+            port: api
+        volumeMounts:
+          - name: resource
+            mountPath: "{{ chronograf_resource_path }}"
+            readOnly: true
+      volumes:
+        - name: resource
+          secret:
+            secretName: chronograf

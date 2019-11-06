@@ -1,0 +1,9 @@
+---
+
+- hosts: chronograf
+  remote_user: vagrant
+  become: yes
+  vars:
+    chronograf_install_type: baremetal # baremetal / docker / kubernetes
+  roles:
+    - chronograf

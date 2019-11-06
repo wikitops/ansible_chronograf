@@ -1,0 +1,12 @@
+---
+
+dependencies:
+
+  - role: chronograf/baremetal
+    when: chronograf_install_type == "baremetal"
+
+  - role: chronograf/docker
+    when: chronograf_install_type == "docker"
+  # 
+  # - role: chronograf/kubernetes
+  #   when: chronograf_install_type == "kubernetes"
